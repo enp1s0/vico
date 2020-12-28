@@ -42,3 +42,8 @@ qdel vico-N
 ## Configuration
 ### Job prologue and epilogue
 You can execute any commands before and after a job by editing `scripts/prologue.sh` and `scripts/epilogue.sh`.
+
+## Note
+This script uses `$HOME/.vico_state` to manage jobs.
+Please do not remove this file.
+By default, the start and end time of jobs are recorded in this file.
