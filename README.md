@@ -1,3 +1,1 @@
-# Vico
-
-'vico' is a simple job queue relying on 'tmux'.
+# Vico - a simple job queue relying on 'tmux'.
