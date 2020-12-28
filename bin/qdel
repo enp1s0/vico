@@ -2,7 +2,7 @@
 
 command tmux kill-session -t $1
 if [ $? -eq 0 ];then
-	echo "Job $1 is deleted"
+	echo "Job $1 has been deleted"
 else
 	echo "No such job : $1"
 fi
