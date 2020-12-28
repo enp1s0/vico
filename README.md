@@ -1,6 +1,9 @@
-# Vico - a simple job queue relying on 'tmux'.
+# Vico - a simple job queue using 'tmux'.
 
 'vico' means 'queue' in Esperanto.
+
+## Requirements
+- tmux
 
 ## Installation
 1. Clone this repository
