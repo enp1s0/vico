@@ -8,7 +8,18 @@
 git clone https://github.com/enp1s0/vico.git
 ```
 
-2. Set environment path in your shell rc (e.g. bash, zsh, etc.)
+2. Set `$PATH`
 ```bash
-export VICO_PATH=/path/to/vico/bin
+export PATH=/path/to/vico/bin:$PATH
+```
+
+## Usage
+### Submit a job
+```bash
+qsub job.sh
+```
+
+### Check job status
+```bash
+qstat
 ```
