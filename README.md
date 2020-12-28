@@ -34,8 +34,11 @@ vico-19: 1 windows (created Tue Dec 29 00:07:42 2020)
 vico-20: 1 windows (created Tue Dec 29 00:07:43 2020)
 ```
 
-
 ### Delete a job
 ```
 qdel vico-N
 ```
+
+## Configuration
+### Job prologue and epilogue
+You can execute any commands before and after a job by editing `scripts/prologue.sh` and `scripts/epilogue.sh`.
