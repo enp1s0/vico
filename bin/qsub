@@ -1,0 +1,41 @@
+#!/bin/sh
+
+VICO_STATE_FILE_PATH=$HOME/.vico_state
+VICO_STATE_SWAP_FILE_PATH=$HOME/.vico_state.swap
+VICO_TMUX_PATH=tmux
+
+VICO_PATH=$(cd $(dirname $0); pwd)/../
+
+# Check job script file existance
+VICO_JS_FULL_PATH=$(pwd)/$1
+if [ ! -e "$VICO_JS_FULL_PATH" ];then
+	echo "[ERROR] No such file : $JS_FULL_PATH"
+	exit
+fi
+
+# Check state file existance
+if [ ! -e "$VICO_STATE_FILE_PATH" ];then
+	echo '0' >$VICO_STATE_FILE_PATH
+fi
+
+VICO_JOB_ID=$(head -n 1 $VICO_STATE_FILE_PATH)
+
+# Check job id
+if [ -z "$VICO_JOB_ID" ];then
+	VICO_JOB_ID=0
+	echo '0' >$VICO_STATE_FILE_PATH
+fi
+
+VICO_NEXT_JOB_ID=$(($VICO_JOB_ID+1))
+
+# Renew job counter
+sed -e "1 s/.*/$VICO_NEXT_JOB_ID/g" $VICO_STATE_FILE_PATH > $VICO_STATE_SWAP_FILE_PATH
+command cp $VICO_STATE_SWAP_FILE_PATH $VICO_STATE_FILE_PATH
+
+VICO_JOB_NAME=vico-$VICO_JOB_ID
+VICO_OUTPUT_FILE_NAME=vico-log.l$VICO_JOB_ID
+
+# Execute job script
+$VICO_TMUX_PATH new-session -d -s "$VICO_JOB_NAME" "sh $VICO_PATH/utils/vico-wait.sh;sh $VICO_JS_FULL_PATH >$VICO_OUTPUT_FILE_NAME 2>&1;exit"
+
+echo "Job $VICO_JOB_ID is successfuly submitted"
