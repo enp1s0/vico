@@ -26,7 +26,7 @@ qsub job.sh
 ```bash
 qstat
 ```
-Then you can see the list of jobs.
+Then you can see a list of jobs.
 Top of it is a running one and the others are waiting ones.
 ```
 vico-18: 1 windows (created Tue Dec 29 00:07:41 2020)
@@ -45,5 +45,6 @@ You can execute any commands before and after a job by editing `scripts/prologue
 
 ## Note
 This script uses `$HOME/.vico_state` to manage jobs.
+It is created at the first job submitting.
 Please do not remove this file.
 By default, the start and end time of jobs are recorded in this file.
