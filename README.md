@@ -48,3 +48,7 @@ This script uses `$HOME/.vico_state` to manage jobs.
 It is created at the first job submitting.
 Please do not remove this file.
 By default, the start and end time of jobs are recorded in this file.
+
+## Environment variables
+- `VICO_JOB_ID` : Job ID
+- `VICO_JOB_NAME` : Job name
