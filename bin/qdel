@@ -11,6 +11,13 @@ if [ "$JOB_NAME" == "head" ];then
 	fi
 fi
 
+expr $JOB_ID + 1 > /dev/null 2>&1
+IS_NUMBER=$?
+
+if [ $IS_NUMBER -lt 2 ];then
+	JOB_NAME="vico-$JOB_NAME"
+fi
+
 command tmux kill-session -t $JOB_NAME
 if [ $? -eq 0 ];then
 	echo "Job $1 has been deleted"
