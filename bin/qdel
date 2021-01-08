@@ -1,6 +1,17 @@
 #!/bin/sh
 
-command tmux kill-session -t $1
+VICO_PATH=$(cd $(dirname $0); pwd)/../
+
+JOB_NAME=$1
+if [ "$JOB_NAME" == "head" ];then
+	JOB_NAME=$($VICO_PATH/bin/qstat | head -n 1 | sed -e 's/:.*//')
+	if [ -z "$JOB_NAME" ];then
+		echo "[ERROR]: No running jobs"
+		exit
+	fi
+fi
+
+command tmux kill-session -t $JOB_NAME
 if [ $? -eq 0 ];then
 	echo "Job $1 has been deleted"
 else
