@@ -38,6 +38,10 @@ vico-20: 1 windows (created Tue Dec 29 00:07:43 2020)
 ```bash
 qdel vico-N
 ```
+or just
+```bash
+qdel N
+```
 
 And it is possible to delete a job which is a head of the job queue.
 ```bash
