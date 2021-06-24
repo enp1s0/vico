@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 VICO_STATE_FILE_PATH=$HOME/.vico_state
 VICO_STATE_SWAP_FILE_PATH=$HOME/.vico_state.swap
