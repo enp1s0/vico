@@ -4,6 +4,11 @@ VICO_STATE_FILE_PATH=$HOME/.vico_state
 VICO_STATE_SWAP_FILE_PATH=$HOME/.vico_state.swap
 VICO_TMUX_PATH=tmux
 
+if [ "$#" -ne 1 ];then
+	echo "Usage: $0 [job.sh]"
+	exit
+fi
+
 VICO_PATH=$(cd $(dirname $0); pwd)/../
 
 # Check job script file existance
