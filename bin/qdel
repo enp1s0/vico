@@ -2,7 +2,16 @@
 
 VICO_PATH=$(cd $(dirname $0); pwd)/../
 
+VICO_WORK_DIR=$HOME/.vico
+[ -d "$VICO_WORK_DIR" ] || mkdir -p $VICO_WORK_DIR
+
 JOB_NAME=$1
+if [ -z "$JOB_NAME" ];then
+  echo "Usage: qdel [jobID]"
+  echo "       qdel head"
+  exit
+fi
+
 if [ "$JOB_NAME" == "head" ];then
 	JOB_NAME=$($VICO_PATH/bin/qstat | head -n 1 | sed -e 's/:.*//')
 	if [ -z "$JOB_NAME" ];then
@@ -14,13 +23,21 @@ fi
 expr $JOB_NAME + 1 > /dev/null 2>&1
 IS_NUMBER=$?
 
+VICO_JOB_ID=$JOB_NAME
 if [ $IS_NUMBER -lt 2 ];then
 	JOB_NAME="vico-$JOB_NAME"
+else
+  VICO_JOB_ID=$(echo $JOB_NAME | cut -c 6-)
+  if [ "$JOB_NAME" != "vico-$VICO_JOB_ID" ];then
+    echo "Could not parse job ID (job name = $JOB_NAME, job ID = $VICO_JOB_ID)"
+  fi
 fi
 
 command tmux kill-session -t $JOB_NAME
 if [ $? -eq 0 ];then
 	echo "Job $JOB_NAME has been deleted"
+  VICO_TEMP_JS_PATH=$VICO_WORK_DIR/vico_js_$VICO_JOB_ID.sh
+  rm -rf $VICO_TEMP_JS_PATH
 else
 	echo "No such job : $JOB_NAME"
 fi

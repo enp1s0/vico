@@ -1,3 +1,6 @@
 #!/bin/sh
-VICO_STATE_FILE_PATH=$HOME/.vico_state
-echo "[START] Job $1 @ $(date)" >> $VICO_STATE_FILE_PATH
+VICO_WORK_DIR=$HOME/.vico
+VICO_STATE_FILE_PATH=$VICO_WORK_DIR/state
+
+VICO_JOB_ID=$1
+echo "[START] Job $VICO_JOB_ID @ $(date)" >> $VICO_STATE_FILE_PATH
