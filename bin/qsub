@@ -1,8 +1,11 @@
 #!/bin/bash
 
-VICO_STATE_FILE_PATH=$HOME/.vico_state
-VICO_STATE_SWAP_FILE_PATH=$HOME/.vico_state.swap
+VICO_WORK_DIR=$HOME/.vico
+VICO_STATE_FILE_PATH=$VICO_WORK_DIR/state
+VICO_STATE_SWAP_FILE_PATH=$VICO_WORK_DIR/state.swap
 VICO_TMUX_PATH=tmux
+
+[ -d "$VICO_WORK_DIR" ] || mkdir -p $VICO_WORK_DIR
 
 if [ "$#" -ne 1 ];then
 	echo "Usage: $0 [job.sh]"
@@ -24,6 +27,10 @@ if [ ! -e "$VICO_STATE_FILE_PATH" ];then
 fi
 
 VICO_JOB_ID=$(head -n 1 $VICO_STATE_FILE_PATH)
+
+VICO_TEMP_JS_PATH=$VICO_WORK_DIR/vico_js_$VICO_JOB_ID.sh
+cp -r $VICO_JS_FULL_PATH $VICO_TEMP_JS_PATH
+VICO_JS_FULL_PATH=$VICO_TEMP_JS_PATH
 
 # Check job id
 if [ -z "$VICO_JOB_ID" ];then
