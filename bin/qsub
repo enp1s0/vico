@@ -15,7 +15,7 @@ fi
 VICO_PATH=$(cd $(dirname $0); pwd)/../
 
 # Check job script file existance
-VICO_JS_FULL_PATH=$(pwd)/$1
+VICO_JS_FULL_PATH=$(realpath $1)
 if [ ! -e "$VICO_JS_FULL_PATH" ];then
 	echo "[ERROR] No such file : $JS_FULL_PATH"
 	exit
